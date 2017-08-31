@@ -1,5 +1,8 @@
 from selenium.webdriver.common.by import By
 
 fields = {
-    'search_field': (By.ID, "lst-ib")
+    #google_page
+    'search_field': (By.ID, "lst-ib"),
+    'email_name': (),
+    'email_password': ()
 }
