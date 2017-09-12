@@ -1,4 +1,3 @@
-from browser import Browser
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,10 +11,11 @@ class BaseElement(object):
     locator = By.ID
     element = None # type: WebElement
 
-    def __init__(self, locator, selector):
+    def __init__(self, locator, selector, context):
         self.locator = locator
         self.original_selector = selector
         self.selector = selector
+        self.browser = context.browser
 
     def set_locator_parameter(self, argument):
         self.selector = self.original_selector.replace('{argument}', argument)
@@ -23,7 +23,7 @@ class BaseElement(object):
         return self
 
     def get_element(self):
-        self.element = WebDriverWait(Browser.driver, 3).until(
+        self.element = WebDriverWait(self.browser.driver, 3).until(
             EC.presence_of_element_located((self.locator, self.selector))
         )
 
@@ -36,13 +36,13 @@ class BaseElement(object):
         self.element.send_keys(value)
 
     def is_element_visible(self, timeout = 5):
-        is_visible = WebDriverWait(Browser.driver, timeout).until(
+        is_visible = WebDriverWait(self.browser.driver, timeout).until(
             EC.visibility_of_element_located((self.locator, self.selector))
         )
         return False if is_visible == False else True
 
     def is_element_present(self, timeout):
-        is_present = WebDriverWait(Browser.driver, timeout).until(
+        is_present = WebDriverWait(self.browser.driver, timeout).until(
             EC.presence_of_element_located((self.locator, self.selector))
         )
         return False if not is_present else True
