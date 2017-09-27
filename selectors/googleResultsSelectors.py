@@ -4,4 +4,4 @@ from selenium.webdriver.common.by import By
 
 class GoogleResultsSelectors(BaseSelectors):
 
-    selectors = {}
+    selectors = {'result_stats': (By.ID, "resultStats")}

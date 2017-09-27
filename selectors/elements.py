@@ -6,7 +6,7 @@ elements = {
 
     #google_page
     'search_suggestion': (By.XPATH, ".//ul[@role='listbox']/li//div[string(.)='{argument}']"),
-    'sign_in': (),
-    'account_icon': (),
-    'logged_user': ()
+    'sign_in': (By.XPATH, ".//a[@id='gb 70']"),
+    'account_icon': (By.XPATH, ".//span[@id='gb_7a']"),
+    'logged_user': (By.XPATH, ".//*[contains(@class,'gb_xb')]")
 }
